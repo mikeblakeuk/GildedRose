@@ -1,5 +1,6 @@
 namespace GildedRose.Console
 {
+#region goblin in the corner code
     public class Item
     {
         public string Name { get; set; }
@@ -8,4 +9,5 @@ namespace GildedRose.Console
 
         public int Quality { get; set; }
     }
+#endregion
 }

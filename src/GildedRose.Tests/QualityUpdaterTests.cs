@@ -18,6 +18,16 @@ namespace GildedRose.Tests
             Assert.AreEqual(29, item.SellIn);
         }
 
+        [Test]
+        public void When_Standard_Item_With_Zeros_Then_Do_Nothing()
+        {
+            var item = new Item { Quality = 0, SellIn = 0 };
+
+            new QualityUpdater().UpdateItem(item);
+
+            Assert.AreEqual(0, item.Quality);
+            Assert.AreEqual(-1, item.SellIn);
+        }
         /// <summary>
         /// The Quality of an item is never negative
         /// </summary>
@@ -41,7 +51,7 @@ namespace GildedRose.Tests
 
             new QualityUpdater().UpdateItem(item);
 
-            Assert.AreEqual(50, item.Quality); //TBC, should this be 50?
+            Assert.AreEqual(50, item.Quality);
             Assert.AreEqual(9, item.SellIn);
         }
 
@@ -55,7 +65,7 @@ namespace GildedRose.Tests
 
             new QualityUpdater().UpdateItem(item);
 
-            Assert.AreEqual(100, item.Quality); //TBC, should this be 50?
+            Assert.AreEqual(100, item.Quality); //TBC, should this be 50? should we throw?
             Assert.AreEqual(50, item.SellIn);
         }
 
@@ -95,19 +105,19 @@ namespace GildedRose.Tests
         }
 
         [Test]
-        public void TODO_Conjured_items_degrade_in_Quality_twice_as_fast_as_normal_items()
+        public void Conjured_items_degrade_in_Quality_twice_as_fast_as_normal_items()
         {
             var item = new Item
             {
-                Name = "Conjured Test",
-                SellIn = 3,
-                Quality = 6
+                Name = Store.ConjuredManaCake,
+                SellIn = 10,
+                Quality = 10
             };
 
             new QualityUpdater().UpdateItem(item);
 
-            Assert.AreEqual(2, item.SellIn);
-            Assert.AreEqual(5, item.Quality);
+            Assert.AreEqual(9, item.SellIn);
+            Assert.AreEqual(8, item.Quality);
         }
     }
 }

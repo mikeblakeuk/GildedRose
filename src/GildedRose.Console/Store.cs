@@ -7,7 +7,7 @@ namespace GildedRose.Console
         public const string SulfurasHandOfRagnaros = "Sulfuras, Hand of Ragnaros";
         public const string AgedBrie = "Aged Brie";
         public const string BackstagePassesToATafkal80etcConcert = "Backstage passes to a TAFKAL80ETC concert";
-
+        public const string ConjuredManaCake = "Conjured Mana Cake";
 
         public IList<Item> LoadItems()
         {
@@ -18,7 +18,7 @@ namespace GildedRose.Console
                 new Item {Name = "Elixir of the Mongoose", SellIn = 5, Quality = 7},
                 new Item {Name = SulfurasHandOfRagnaros, SellIn = 0, Quality = 80},
                 new Item {Name = BackstagePassesToATafkal80etcConcert, SellIn = 15, Quality = 20},
-                new Item {Name = "Conjured Mana Cake", SellIn = 3, Quality = 6}
+                new Item {Name = ConjuredManaCake, SellIn = 3, Quality = 6}
             };
         }
     }

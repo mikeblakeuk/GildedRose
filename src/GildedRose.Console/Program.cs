@@ -5,8 +5,10 @@ namespace GildedRose.Console
 {
     internal class Program
     {
+        #region goblin in the corner code
         // ReSharper disable once InconsistentNaming
         private IList<Item> Items;
+        #endregion
 
         private static void Main(string[] args)
         {
@@ -29,8 +31,8 @@ namespace GildedRose.Console
         // ReSharper disable once MemberCanBePrivate.Global
         public void UpdateQuality()
         {
-            var q = new QualityUpdater();
-            q.UpdateQuality(Items);
+            var updaterThatShouldBeInIoc = new QualityUpdater();
+            updaterThatShouldBeInIoc.UpdateQuality(Items); //Pass this in?
         }
     }
 }
