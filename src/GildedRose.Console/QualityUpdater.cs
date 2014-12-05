@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using GildedRose.Console;
 
@@ -15,6 +16,9 @@ namespace GildedRose
 
         public void UpdateItem(Item item)
         {
+            if (item == null) throw new ArgumentNullException("item");
+            if(item.Quality < 0) throw new ArgumentOutOfRangeException("item", "Quality of product is too low");
+
             if (item.Name != Store.AgedBrie && item.Name != Store.BackstagePassesToATafkal80etcConcert)
             {
                 if (item.Quality > 0)
