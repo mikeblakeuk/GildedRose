@@ -4,11 +4,14 @@ using NUnit.Framework;
 
 namespace GildedRose.Tests
 {
+    // This could be broken into multiple files if required
     [TestFixture]
     public class QualityUpdaterTests
     {
         [Test]
-        public void When_Valid_Standard_Item_Then_Update()
+        [TestCase("")]
+        [TestCase("AnyName")]
+        public void When_Valid_Standard_Item_Then_Update(string name)
         {
             var item = new Item { Quality = 20, SellIn = 30 };
 
@@ -28,6 +31,7 @@ namespace GildedRose.Tests
             Assert.AreEqual(0, item.Quality);
             Assert.AreEqual(-1, item.SellIn);
         }
+
         /// <summary>
         /// The Quality of an item is never negative
         /// </summary>
@@ -37,8 +41,7 @@ namespace GildedRose.Tests
             var badItem = new Item { Quality = -1, SellIn = 1 };
 
             Assert.Throws<ArgumentOutOfRangeException>(() =>
-                new QualityUpdater().UpdateItem(badItem)
-                );
+                new QualityUpdater().UpdateItem(badItem));
         }
 
         /// <summary>
@@ -69,7 +72,6 @@ namespace GildedRose.Tests
             Assert.AreEqual(50, item.SellIn);
         }
 
-
         /// <summary>
         /// "Aged Brie" actually increases in Quality the older it gets
         /// </summary>
@@ -94,7 +96,7 @@ namespace GildedRose.Tests
         [Test]
         public void When_BackstagePassesToATafkal80etcConcert_Then_Correct()
         {
-            var item = new Item { Name = Store.BackstagePassesToATafkal80etcConcert, Quality = 20, SellIn = 10 };
+            var item = new Item { Name = Store.BackstagePassesToATafkal80EtcConcert, Quality = 20, SellIn = 10 };
 
             new QualityUpdater().UpdateItem(item);
 
@@ -104,6 +106,26 @@ namespace GildedRose.Tests
             // TODO More tests around this
         }
 
+        [Test]
+        public void When_BackstagePassesToATafkal80etcConcert_Before_Concert_Then_Increase()
+        {
+            var item = new Item { Name = Store.BackstagePassesToATafkal80EtcConcert, Quality = 20, SellIn = 1 };
+
+            new QualityUpdater().UpdateItem(item);
+
+            Assert.AreEqual(23, item.Quality);
+            Assert.AreEqual(0, item.SellIn);
+        }
+        [Test]
+        public void When_BackstagePassesToATafkal80etcConcert_After_Concert_Then_Zero()
+        {
+            var item = new Item { Name = Store.BackstagePassesToATafkal80EtcConcert, Quality = 20, SellIn = 0 };
+
+            new QualityUpdater().UpdateItem(item);
+
+            Assert.AreEqual(0, item.Quality);
+            Assert.AreEqual(-1, item.SellIn);
+        }
         [Test]
         public void Conjured_items_degrade_in_Quality_twice_as_fast_as_normal_items()
         {

@@ -1,8 +1,7 @@
 using System;
 using System.Collections.Generic;
-using GildedRose.Console;
 
-namespace GildedRose
+namespace GildedRose.Console
 {
     public class QualityUpdater
     {
@@ -25,7 +24,7 @@ namespace GildedRose
             if (item.Name == Store.SulfurasHandOfRagnaros)
                 return;
 
-            if (item.Name == Store.AgedBrie || item.Name == Store.BackstagePassesToATafkal80etcConcert)
+            if (item.Name == Store.AgedBrie || item.Name == Store.BackstagePassesToATafkal80EtcConcert)
             {
                 IncreaseQuality(item);
             }
@@ -41,29 +40,14 @@ namespace GildedRose
             UpdateQualityAfterSellByDate(item);
         }
 
-        private static void UpdateQualityAfterSellByDate(Item item)
+        private static void ReduceQuality(Item item)
         {
-            if (item.Name == Store.AgedBrie)
-            {
-                if (item.Quality < 50)
-                {
-                    item.Quality = item.Quality + 1;
-                }
-            }
-            else
-            {
-                if (item.Name == Store.BackstagePassesToATafkal80etcConcert)
-                {
-                    item.Quality = item.Quality - item.Quality;
-                }
-                else
-                {
-                    if (item.Quality > 0)
-                    {
-                        item.Quality = item.Quality - 1;
-                    }
-                }
-            }
+            if (item.Quality <= 0)
+                return;
+
+            item.Quality = item.Name == Store.ConjuredManaCake
+                ? item.Quality - 2
+                : item.Quality - 1;
         }
 
         private static void IncreaseQuality(Item item)
@@ -73,7 +57,7 @@ namespace GildedRose
 
             item.Quality = item.Quality + 1;
 
-            if (item.Name != Store.BackstagePassesToATafkal80etcConcert)
+            if (item.Name != Store.BackstagePassesToATafkal80EtcConcert)
                 return;
 
             if (item.SellIn < 11)
@@ -93,14 +77,30 @@ namespace GildedRose
             }
         }
 
-        private static void ReduceQuality(Item item)
+        private static void UpdateQualityAfterSellByDate(Item item)
         {
-            if (item.Quality <= 0)
-                return;
-            
-            item.Quality = item.Name == Store.ConjuredManaCake 
-                ? item.Quality - 2 
-                : item.Quality - 1;
+            if (item.Name == Store.AgedBrie)
+            {
+                if (item.Quality < 50)
+                {
+                    item.Quality = item.Quality + 1;
+                }
+            }
+            else
+            {
+                if (item.Name == Store.BackstagePassesToATafkal80EtcConcert)
+                {
+                    item.Quality = item.Quality - item.Quality;
+                }
+                else
+                {
+                    if (item.Quality > 0)
+                    {
+                        item.Quality = item.Quality - 1;
+                    }
+                }
+            }
         }
+
     }
 }
