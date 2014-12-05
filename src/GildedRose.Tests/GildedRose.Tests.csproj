@@ -42,6 +42,7 @@
     <Reference Include="Microsoft.CSharp" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DurationTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="QualityStoreTests.cs" />
     <Compile Include="QualityUpdaterTests.cs" />
