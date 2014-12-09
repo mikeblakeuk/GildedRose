@@ -20,5 +20,6 @@ e.g. `new AgedBrie() { Sell = 1, Quality = 2 }` then use `if (item is AgedBrie)`
  - Note; const string are in Store. These maybe should be in the Updater instead.
 
 ### Next steps
- - Test a month using the stock sample and plot the quality/sellitem on a graph
  - Refactor the update method futher so it's easier to read
+
+![Sample Chart](https://github.com/mikeblakeuk/GildedRose/blob/master/hacking.png)
